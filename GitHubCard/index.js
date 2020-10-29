@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
@@ -17,6 +19,7 @@
     and append the returned markup to the DOM as a child of .cards
 */
 
+
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
     follow this link in your browser https://api.github.com/users/<Your github name>/followers,
@@ -27,8 +30,6 @@
     Using that array, iterate over it, requesting data for each user, creating a new card for each
     user, and adding that card to the DOM.
 */
-
-const followersArray = [];
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -49,6 +50,70 @@ const followersArray = [];
       </div>
     </div>
 */
+const cardContainer = document.querySelector(".cards");
+
+function cardMaker(cardObj) {
+// instantiating the elements
+  const card = document.createElement('div');
+  const profilePic = document.createElement('img');
+  const cardInfo = document.createElement('div');
+
+// items in the card-info
+  const name = document.createElement('h3');
+  const username = document.createElement('p');
+  const location = document.createElement('p');
+  const profile = document.createElement('p');
+  const profileLink = document.createElement('a');
+  const followers = document.createElement('p');
+  const following = document.createElement('p');
+  const bio = document.createElement('p');
+
+// add to html
+  card.appendChild(profilePic);
+  card.appendChild(cardInfo);
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(username);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  profile.appendChild(profileLink);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
+
+// pulling data
+  profilePic.setAttribute('src', cardObj.avatar_url);
+  name.textContent = cardObj.name
+  username.textContent = cardObj.login
+  location.textContent = cardObj.location
+  profile.textContent = 'Profile: ' //tried adding html_url here but it doesn't hyperlink
+  profileLink.setAttribute = ('href', cardObj.html_url);
+  console.log(profileLink); //console.log just shows a tag?
+  profileLink.textContent = cardObj.html_url;
+  // console.log(profile.link);
+  followers.textContent = 'Followers: ' + cardObj.followers
+  following.textContent = 'Following: ' + cardObj.following
+  bio.textContent = 'Bio: ' + cardObj.bio
+// adding classes
+  card.classList.add('card');
+  cardInfo.classList.add('card-info');
+  name.classList.add('name');
+  username.classList.add('username');
+
+  return card
+}
+
+const followersArray = [ 'katieolson84', 'tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell'];
+  followersArray.forEach(username => {
+
+axios.get(`https://api.github.com/users/${username}`)
+  .then(res => {
+    console.log(res.data)
+    cardContainer.append(cardMaker(res.data));
+  })
+  .catch(drama => {
+    console.log(drama)
+  })
+})
 
 /*
   List of LS Instructors Github username's:
@@ -58,3 +123,4 @@ const followersArray = [];
     luishrd
     bigknell
 */
+
