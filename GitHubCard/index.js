@@ -64,8 +64,8 @@ function cardMaker(cardObj) {
   const location = document.createElement('p');
   const profile = document.createElement('p');
   const profileLink = document.createElement('a');
-  profileLink.style.textDecoration = "none";
-  profileLink.style.color = "black";
+  profileLink.style.fontSize = "14px";
+  profileLink.style.lineHeight = "1.5";
   const followers = document.createElement('p');
   const following = document.createElement('p');
   const bio = document.createElement('p');
@@ -77,19 +77,20 @@ function cardMaker(cardObj) {
   cardInfo.appendChild(username);
   cardInfo.appendChild(location);
   cardInfo.appendChild(profile);
-  profile.appendChild(profileLink);
+  cardInfo.appendChild(profileLink);
   cardInfo.appendChild(followers);
   cardInfo.appendChild(following);
   cardInfo.appendChild(bio);
 
 // pulling data
+  profile.textContent = 'Profile: '
   profilePic.src = cardObj.avatar_url;
   name.textContent = cardObj.name
   username.textContent = cardObj.login
   location.textContent = 'Location: ' + cardObj.location
 
   profileLink.href = cardObj.html_url
-  profileLink.textContent = `Profile: ${cardObj.html_url}`  
+  profileLink.textContent = cardObj.html_url  
    
   console.log(profileLink); 
 
