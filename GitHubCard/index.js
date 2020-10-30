@@ -77,23 +77,19 @@ function cardMaker(cardObj) {
   cardInfo.appendChild(username);
   cardInfo.appendChild(location);
   cardInfo.appendChild(profile);
-  cardInfo.appendChild(profileLink);
   cardInfo.appendChild(followers);
   cardInfo.appendChild(following);
   cardInfo.appendChild(bio);
 
 // pulling data
   profile.textContent = 'Profile: '
+  profile.appendChild(profileLink);
   profilePic.src = cardObj.avatar_url;
+  profileLink.href = cardObj.html_url
+  profileLink.textContent = cardObj.html_url; 
   name.textContent = cardObj.name
   username.textContent = cardObj.login
   location.textContent = 'Location: ' + cardObj.location
-
-  profileLink.href = cardObj.html_url
-  profileLink.textContent = cardObj.html_url  
-   
-  console.log(profileLink); 
-
   followers.textContent = 'Followers: ' + cardObj.followers
   following.textContent = 'Following: ' + cardObj.following
   bio.textContent = 'Bio: ' + cardObj.bio
