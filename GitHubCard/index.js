@@ -64,6 +64,8 @@ function cardMaker(cardObj) {
   const location = document.createElement('p');
   const profile = document.createElement('p');
   const profileLink = document.createElement('a');
+  profileLink.style.textDecoration = "none";
+  profileLink.style.color = "black";
   const followers = document.createElement('p');
   const following = document.createElement('p');
   const bio = document.createElement('p');
@@ -81,15 +83,16 @@ function cardMaker(cardObj) {
   cardInfo.appendChild(bio);
 
 // pulling data
-  profilePic.setAttribute('src', cardObj.avatar_url);
+  profilePic.src = cardObj.avatar_url;
   name.textContent = cardObj.name
   username.textContent = cardObj.login
-  location.textContent = cardObj.location
-  profile.textContent = 'Profile: ' //tried adding html_url here but it doesn't hyperlink
-  profileLink.setAttribute = ('href', cardObj.html_url);
-  console.log(profileLink); //console.log just shows a tag?
-  profileLink.textContent = cardObj.html_url;
-  // console.log(profile.link);
+  location.textContent = 'Location: ' + cardObj.location
+
+  profileLink.href = cardObj.html_url
+  profileLink.textContent = `Profile: ${cardObj.html_url}`  
+   
+  console.log(profileLink); 
+
   followers.textContent = 'Followers: ' + cardObj.followers
   following.textContent = 'Following: ' + cardObj.following
   bio.textContent = 'Bio: ' + cardObj.bio
